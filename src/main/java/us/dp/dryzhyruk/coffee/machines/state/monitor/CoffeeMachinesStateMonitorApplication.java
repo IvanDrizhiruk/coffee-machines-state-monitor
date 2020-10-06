@@ -1,4 +1,4 @@
-package us.dp.dryzhyruk.coffeemachinesstatemonitor;
+package us.dp.dryzhyruk.coffee.machines.state.monitor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
