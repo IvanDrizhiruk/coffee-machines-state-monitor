@@ -1,4 +1,4 @@
-package us.dp.dryzhyruk.coffee.machines.state.monitor;
+package ua.dp.dryzhyruk.coffee.machines.state.monitor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -6,8 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CoffeeMachinesStateMonitorApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+    }
 }
