@@ -2,7 +2,7 @@ package ua.dp.dryzhyruk.coffee.machines.state.monitor.rest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.CoffeeMachinesServices;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.CoffeeMachinesEventRegisterServices;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Cup;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.rest.dto.CoffeeMachineLineServiceDTO;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.rest.dto.CupDTO;
@@ -15,11 +15,11 @@ import javax.ws.rs.*;
 @Consumes("application/json")
 public class EventRegistrarResource {
 
-    private final CoffeeMachinesServices coffeeMachinesServices;
+    private final CoffeeMachinesEventRegisterServices coffeeMachinesEventRegisterServices;
 
     @Autowired
-    public EventRegistrarResource(CoffeeMachinesServices coffeeMachinesServices) {
-        this.coffeeMachinesServices = coffeeMachinesServices;
+    public EventRegistrarResource(CoffeeMachinesEventRegisterServices coffeeMachinesEventRegisterServices) {
+        this.coffeeMachinesEventRegisterServices = coffeeMachinesEventRegisterServices;
     }
 
     @PATCH
@@ -33,7 +33,7 @@ public class EventRegistrarResource {
                 .withMilk(cupDTO.isWithMilk())
                 .build();
 
-        coffeeMachinesServices.registerNewMadeCup(coffeeMachineId, cup);
+        coffeeMachinesEventRegisterServices.registerNewMadeCup(coffeeMachineId, cup);
     }
 
     @PATCH
@@ -42,7 +42,7 @@ public class EventRegistrarResource {
             @PathParam("coffeeMachineId") String coffeeMachineId,
             CoffeeMachineLineServiceDTO coffeeMachineLineServiceDTO) {
 
-        coffeeMachinesServices.registerLineService(
+        coffeeMachinesEventRegisterServices.registerLineService(
                 coffeeMachineId,
                 coffeeMachineLineServiceDTO.isCoffeeBeansFilled(),
                 coffeeMachineLineServiceDTO.isMilkFilled(),

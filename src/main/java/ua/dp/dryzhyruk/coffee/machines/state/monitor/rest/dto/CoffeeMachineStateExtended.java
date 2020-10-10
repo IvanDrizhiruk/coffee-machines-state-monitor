@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class CoffeeMachinesStatus {
+public class CoffeeMachineStateExtended {
 
     private String coffeeMachineName;
 }

@@ -9,13 +9,13 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMa
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineState;
 
 @Service
-public class CoffeeMachinesServices {
+public class CoffeeMachinesEventRegisterServices {
 
     private final CoffeeMachineConfigurationStorage coffeeMachineConfigurationStorage;
     private final CoffeeMachineStateStorage coffeeMachineStateStorage;
 
     @Autowired
-    public CoffeeMachinesServices(
+    public CoffeeMachinesEventRegisterServices(
             CoffeeMachineConfigurationStorage coffeeMachineConfigurationStorage,
             CoffeeMachineStateStorage coffeeMachineStateStorage) {
         this.coffeeMachineConfigurationStorage = coffeeMachineConfigurationStorage;
