@@ -1,10 +1,13 @@
 package ua.dp.dryzhyruk.coffee.machines.state.monitor.rest;
 
 import lombok.extern.slf4j.Slf4j;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.rest.dto.CoffeeCup;
+import org.springframework.beans.factory.annotation.Autowired;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.CoffeeMachinesServices;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Cup;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.rest.dto.CoffeeMachineLineServiceDTO;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.rest.dto.CupDTO;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.Response;
 
 @Slf4j
 @Path("/event-registrar")
@@ -12,25 +15,37 @@ import javax.ws.rs.core.Response;
 @Consumes("application/json")
 public class EventRegistrarResource {
 
-    @PATCH
-    @Path("/coffee-machine/{coffeeMachineId}/coffee-cap-produced")
-    public void registerCoffee(
-            @PathParam("coffeeMachineId") String coffeeMachineId,
-            CoffeeCup coffeeCup) {
+    private final CoffeeMachinesServices coffeeMachinesServices;
 
-        log.info("Coffee machine: {} ==> {}", coffeeMachineId, coffeeCup);
+    @Autowired
+    public EventRegistrarResource(CoffeeMachinesServices coffeeMachinesServices) {
+        this.coffeeMachinesServices = coffeeMachinesServices;
     }
 
-    @GET
-    @Path("/coffee-machine/{coffeeMachineId}/coffee-cap-produced")
-    public Response registerCoffee(
-            @PathParam("coffeeMachineId") String coffeeMachineId) {
+    @PATCH
+    @Path("/coffee-machine/{coffeeMachineId}/cup-produced")
+    public void onCoffeeCupProduced(
+            @PathParam("coffeeMachineId") String coffeeMachineId,
+            CupDTO cupDTO) {
 
-        log.info("Coffee machine: {}", coffeeMachineId);
-
-        return Response
-                .status(200)
-                .entity(coffeeMachineId)
+        Cup cup = Cup.builder()
+                .coffeePortions(cupDTO.getCoffeePortions())
+                .withMilk(cupDTO.isWithMilk())
                 .build();
+
+        coffeeMachinesServices.registerNewMadeCup(coffeeMachineId, cup);
+    }
+
+    @PATCH
+    @Path("/coffee-machine/{coffeeMachineId}/line-service")
+    public void onLineService(
+            @PathParam("coffeeMachineId") String coffeeMachineId,
+            CoffeeMachineLineServiceDTO coffeeMachineLineServiceDTO) {
+
+        coffeeMachinesServices.registerLineService(
+                coffeeMachineId,
+                coffeeMachineLineServiceDTO.isCoffeeBeansFilled(),
+                coffeeMachineLineServiceDTO.isMilkFilled(),
+                coffeeMachineLineServiceDTO.isTrashContainerCleaned());
     }
 }

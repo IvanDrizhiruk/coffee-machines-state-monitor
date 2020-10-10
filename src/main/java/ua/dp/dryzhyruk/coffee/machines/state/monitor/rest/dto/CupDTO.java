@@ -5,8 +5,8 @@ import lombok.Value;
 
 @Value
 @Builder
-public class CoffeeCup {
+public class CupDTO {
 
-    private int coffeePortions;
-    private boolean withMilk;
+    private final int coffeePortions;
+    private final  boolean withMilk;
 }

@@ -3,7 +3,8 @@
 Project for learning approaches and tools of testing
 
 #Available urls
-- GET http://localhost:8080/event-registrar/coffee-machine/{coffeeMachineId}/coffee-cap-produced
-- POST http://localhost:8080/event-registrar/coffee-machine/{coffeeMachineId}/coffee-cap-produced
-    - body: CoffeeCup
+- POST http://localhost:8080/event-registrar/coffee-machine/{coffeeMachineId}/cup-produced
+    - body: CupDTO
+- GET http://localhost:8080/event-registrar/coffee-machine/{coffeeMachineId}/line-service
+    - body: CoffeeMachineLineServiceDTO
 - GET http://localhost:8080/coffee-machine/all/status
