@@ -1,7 +1,7 @@
 package ua.dp.dryzhyruk.coffee.machines.state.monitor.core;
 
 import org.springframework.stereotype.Service;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator.StateCalculator;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator.StatusCalculator;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineState;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
@@ -14,22 +14,19 @@ public class CoffeeMachinesStatusCalculator {
             CoffeeMachineStateEntity coffeeMachineState,
             CoffeeMachineConfiguration coffeeMachineConfiguration) {
 
-        Status coffeeBeansStatus = new StateCalculator(
-                coffeeMachineConfiguration.getMaxNumberCoffeeBeansPortions(),
-                coffeeMachineConfiguration.getCoffeeBeansWarningLevel(),
-                coffeeMachineConfiguration.getCoffeeBeansCriticalLevel())
+        Status coffeeBeansStatus = new StatusCalculator(
+                coffeeMachineConfiguration.getCoffeeBeansWarningNPortionLeft(),
+                coffeeMachineConfiguration.getCoffeeBeansCriticalNPortionLeft())
                 .calculateState(coffeeMachineState.getCoffeeBeansLeftForNPortions());
 
-        Status milkStatus = new StateCalculator(
-                coffeeMachineConfiguration.getMaxNumberMilkPortions(),
-                coffeeMachineConfiguration.getMilkWarningLevel(),
-                coffeeMachineConfiguration.getMilkCriticalLevel())
+        Status milkStatus = new StatusCalculator(
+                coffeeMachineConfiguration.getMilkWarningNPortionLeft(),
+                coffeeMachineConfiguration.getMilkCriticalNPortionLeft())
                 .calculateState(coffeeMachineState.getMilkLeftForNPortions());
 
-        Status placesInTrashContainerStatus = new StateCalculator(
-                coffeeMachineConfiguration.getMaxNumberPlacesInTrashContainer(),
-                coffeeMachineConfiguration.getPlacesInTrashContainerWarningLevel(),
-                coffeeMachineConfiguration.getPlacesInTrashContainerCriticalLevel())
+        Status placesInTrashContainerStatus = new StatusCalculator(
+                coffeeMachineConfiguration.getPlacesInTrashContainerWarningNPortionLeft(),
+                coffeeMachineConfiguration.getPlacesInTrashContainerCriticalNPortionLeft())
                 .calculateState(coffeeMachineState.getPlaceInTrashContainerLeftForNPortions());
 
 
