@@ -1,14 +1,14 @@
 package ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api;
 
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineState;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 import java.util.List;
 
 public interface CoffeeMachineStateStorage {
 
-    CoffeeMachineState find(String coffeeMachineId);
+    CoffeeMachineStateEntity find(String coffeeMachineId);
 
-    List<CoffeeMachineState> findAll();
+    List<CoffeeMachineStateEntity> findAll();
 
-    void update(String coffeeMachineId, CoffeeMachineState newCoffeeMachineState);
+    void update(String coffeeMachineId, CoffeeMachineStateEntity newCoffeeMachineState);
 }

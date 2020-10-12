@@ -6,7 +6,7 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Cup;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineState;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 @Service
 public class CoffeeMachinesEventRegisterServices {
@@ -23,26 +23,26 @@ public class CoffeeMachinesEventRegisterServices {
     }
 
     public void registerNewMadeCup(String coffeeMachineId, Cup cup) {
-        CoffeeMachineState coffeeMachineState = coffeeMachineStateStorage.find(coffeeMachineId);
+        CoffeeMachineStateEntity coffeeMachineState = coffeeMachineStateStorage.find(coffeeMachineId);
 
-        CoffeeMachineState newCoffeeMachineState = calculateNewStateOnCupMade(cup, coffeeMachineState);
+        CoffeeMachineStateEntity newCoffeeMachineState = calculateNewStateOnCupMade(cup, coffeeMachineState);
 
         coffeeMachineStateStorage.update(coffeeMachineId, newCoffeeMachineState);
     }
 
     public void registerLineService(
             String coffeeMachineId, boolean coffeeBeansFilled, boolean milkFilled, boolean trashContainerCleaned) {
-        CoffeeMachineState coffeeMachineState = coffeeMachineStateStorage.find(coffeeMachineId);
+        CoffeeMachineStateEntity coffeeMachineState = coffeeMachineStateStorage.find(coffeeMachineId);
         CoffeeMachineConfiguration coffeeMachineConfiguration = coffeeMachineConfigurationStorage.find(coffeeMachineId);
 
-        CoffeeMachineState newCoffeeMachineState = calculateNewStateOnLineService(
+        CoffeeMachineStateEntity newCoffeeMachineState = calculateNewStateOnLineService(
                 coffeeBeansFilled, milkFilled, trashContainerCleaned,
                 coffeeMachineState, coffeeMachineConfiguration);
 
         coffeeMachineStateStorage.update(coffeeMachineId, newCoffeeMachineState);
     }
 
-    private CoffeeMachineState calculateNewStateOnCupMade(Cup cup, CoffeeMachineState coffeeMachineState) {
+    private CoffeeMachineStateEntity calculateNewStateOnCupMade(Cup cup, CoffeeMachineStateEntity coffeeMachineState) {
 
         int coffeeBeansLeftForNPortions =
                 Math.max(coffeeMachineState.getCoffeeBeansLeftForNPortions() - cup.getCoffeePortions(), 0);
@@ -60,11 +60,11 @@ public class CoffeeMachinesEventRegisterServices {
                 .build();
     }
 
-    private CoffeeMachineState calculateNewStateOnLineService(
+    private CoffeeMachineStateEntity calculateNewStateOnLineService(
             boolean coffeeBeansFilled,
             boolean milkFilled,
             boolean trashContainerCleaned,
-            CoffeeMachineState coffeeMachineState,
+            CoffeeMachineStateEntity coffeeMachineState,
             CoffeeMachineConfiguration coffeeMachineConfiguration) {
 
         int coffeeBeansLeftForNPortions = coffeeBeansFilled

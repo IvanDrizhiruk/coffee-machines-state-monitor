@@ -2,31 +2,30 @@ package ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.impl;
 
 import org.springframework.stereotype.Repository;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineState;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 @Repository
 public class CoffeeMachineStateStorageInMemory implements CoffeeMachineStateStorage {
 
-    private final Map<String, CoffeeMachineState> coffeeMachineStates = new ConcurrentHashMap<>();
+    private final Map<String, CoffeeMachineStateEntity> coffeeMachinesStates = new ConcurrentHashMap<>();
 
     @Override
-    public CoffeeMachineState find(String coffeeMachineId) {
-        return coffeeMachineStates.get(coffeeMachineId);
+    public CoffeeMachineStateEntity find(String coffeeMachineId) {
+        return coffeeMachinesStates.get(coffeeMachineId);
     }
 
     @Override
-    public List<CoffeeMachineState> findAll() {
-        return new ArrayList<>(coffeeMachineStates.values());
+    public List<CoffeeMachineStateEntity> findAll() {
+        return new ArrayList<>(coffeeMachinesStates.values());
     }
 
     @Override
-    public void update(String coffeeMachineId, CoffeeMachineState coffeeMachineState) {
-        coffeeMachineStates.put(coffeeMachineId, coffeeMachineState);
+    public void update(String coffeeMachineId, CoffeeMachineStateEntity coffeeMachineState) {
+        coffeeMachinesStates.put(coffeeMachineId, coffeeMachineState);
     }
 }
