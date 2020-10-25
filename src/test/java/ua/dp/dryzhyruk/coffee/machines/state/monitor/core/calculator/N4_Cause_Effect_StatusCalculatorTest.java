@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
 
-class StatusCalculator4Test {
+class N4_Cause_Effect_StatusCalculatorTest {
 
     @Test
     public void statusShouldBeWarningIfCriticalLevelIsZero() {

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
 
-class StatusCalculator1Test {
+class N1_SuccessfulScenario_StatusCalculatorTest {
 
     @Test
     public void statusShouldBeOkIfValueLesOfAllConfigurations() {
