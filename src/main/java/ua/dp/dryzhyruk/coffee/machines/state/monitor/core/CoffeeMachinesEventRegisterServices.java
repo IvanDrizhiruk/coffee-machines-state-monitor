@@ -1,7 +1,8 @@
 package ua.dp.dryzhyruk.coffee.machines.state.monitor.core;
 
-import org.jvnet.hk2.annotations.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Cup;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
@@ -47,7 +48,7 @@ public class CoffeeMachinesEventRegisterServices {
         int coffeeBeansLeftForNPortions =
                 Math.max(coffeeMachineState.getCoffeeBeansLeftForNPortions() - cup.getCoffeePortions(), 0);
 
-        int milkChangeCount = cup.isWithMilk() || coffeeMachineState.getMilkLeftForNPortions() > 0 ? 1 : 0;
+        int milkChangeCount = cup.isWithMilk() && coffeeMachineState.getMilkLeftForNPortions() > 0 ? 1 : 0;
         int milkLeftForNPortions = coffeeMachineState.getMilkLeftForNPortions() - milkChangeCount;
 
         int placeInTrashLeftForNPortions =

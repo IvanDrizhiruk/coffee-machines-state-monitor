@@ -1,7 +1,9 @@
-package ua.dp.dryzhyruk.coffee.machines.state.monitor.core;
+package ua.dp.dryzhyruk.coffee.machines.state.monitor.module;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.CoffeeMachinesStatusCalculator;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.CoffeeMachinesStatusService;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineState;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
