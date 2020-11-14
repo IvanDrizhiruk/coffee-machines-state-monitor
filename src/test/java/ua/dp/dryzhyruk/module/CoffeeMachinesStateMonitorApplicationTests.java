@@ -1,4 +1,4 @@
-package ua.dp.dryzhyruk.coffee.machines.state.monitor.module;
+package ua.dp.dryzhyruk.module;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
