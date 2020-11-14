@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator.CoffeeMachinesStatusCalculator;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineState;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 class N4_Cause_Effect_CoffeeMachinesStatusCalculatorTest {
@@ -23,7 +23,7 @@ class N4_Cause_Effect_CoffeeMachinesStatusCalculatorTest {
                 .placeInTrashContainerLeftForNPortions(100)
                 .build();
 
-        CoffeeMachineConfiguration coffeeMachineConfiguration = CoffeeMachineConfiguration.builder()
+        CoffeeMachineConfigurationEntity coffeeMachineConfiguration = CoffeeMachineConfigurationEntity.builder()
                 .coffeeMachineId(coffeeMachineId)
                 .maxNumberCoffeeBeansPortions(100)
                 .coffeeBeansWarningNPortionLeft(30)
@@ -67,7 +67,7 @@ class N4_Cause_Effect_CoffeeMachinesStatusCalculatorTest {
                 .placeInTrashContainerLeftForNPortions(90)
                 .build();
 
-        CoffeeMachineConfiguration coffeeMachineConfiguration = CoffeeMachineConfiguration.builder()
+        CoffeeMachineConfigurationEntity coffeeMachineConfiguration = CoffeeMachineConfigurationEntity.builder()
                 .coffeeMachineId(coffeeMachineId)
                 .maxNumberCoffeeBeansPortions(100)
                 .coffeeBeansWarningNPortionLeft(30)
@@ -111,7 +111,7 @@ class N4_Cause_Effect_CoffeeMachinesStatusCalculatorTest {
                 .placeInTrashContainerLeftForNPortions(0)
                 .build();
 
-        CoffeeMachineConfiguration coffeeMachineConfiguration = CoffeeMachineConfiguration.builder()
+        CoffeeMachineConfigurationEntity coffeeMachineConfiguration = CoffeeMachineConfigurationEntity.builder()
                 .coffeeMachineId(coffeeMachineId)
                 .maxNumberCoffeeBeansPortions(100)
                 .coffeeBeansWarningNPortionLeft(10)

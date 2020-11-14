@@ -47,6 +47,6 @@ class N5_ErrorGuessing_Mockito_CoffeeMachinesEventRegisterServicesTest {
         registerServices.registerNewMadeCup(coffeeMachineId, cup);
 
         //then
-        Mockito.verify(stateStorage).update(expectedUpdatedCoffeeMachineId, expectedUpdatedCoffeeMachineState);
+        Mockito.verify(stateStorage).update(expectedUpdatedCoffeeMachineState);
     }
 }

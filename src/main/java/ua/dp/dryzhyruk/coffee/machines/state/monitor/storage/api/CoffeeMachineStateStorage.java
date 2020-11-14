@@ -10,5 +10,9 @@ public interface CoffeeMachineStateStorage {
 
     List<CoffeeMachineStateEntity> findAll();
 
-    void update(String coffeeMachineId, CoffeeMachineStateEntity newCoffeeMachineState);
+    void update(CoffeeMachineStateEntity newCoffeeMachineState);
+
+    void save(CoffeeMachineStateEntity newCoffeeMachineState);
+
+    void removeAll();
 }

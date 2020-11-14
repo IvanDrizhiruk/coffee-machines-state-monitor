@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class CoffeeMachineConfiguration {
+public class CoffeeMachineConfigurationEntity {
 
     private final String coffeeMachineId;
 

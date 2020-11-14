@@ -6,7 +6,7 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator.CoffeeMachi
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineState;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 import java.util.List;
@@ -37,15 +37,15 @@ public class CoffeeMachinesStatusService {
                         CoffeeMachineStateEntity::getCoffeeMachineId,
                         Function.identity()));
 
-        Map<String, CoffeeMachineConfiguration> configurationByCoffeeMachineId = coffeeMachineConfigurationStorage.findAll().stream()
+        Map<String, CoffeeMachineConfigurationEntity> configurationByCoffeeMachineId = coffeeMachineConfigurationStorage.findAll().stream()
                 .collect(Collectors.toMap(
-                        CoffeeMachineConfiguration::getCoffeeMachineId,
+                        CoffeeMachineConfigurationEntity::getCoffeeMachineId,
                         Function.identity()));
 
         return stateByCoffeeMachineId.keySet().stream()
                 .map(coffeeMachineId -> {
                     CoffeeMachineStateEntity coffeeMachineState = stateByCoffeeMachineId.get(coffeeMachineId);
-                    CoffeeMachineConfiguration coffeeMachineConfiguration = configurationByCoffeeMachineId.get(coffeeMachineId);
+                    CoffeeMachineConfigurationEntity coffeeMachineConfiguration = configurationByCoffeeMachineId.get(coffeeMachineId);
 
                     return coffeeMachinesStatusCalculator.calculate(coffeeMachineState, coffeeMachineConfiguration);
                 })
@@ -54,7 +54,7 @@ public class CoffeeMachinesStatusService {
 
     public CoffeeMachineState getCoffeeMachinesStatus(String coffeeMachineId) {
         CoffeeMachineStateEntity coffeeMachineState = coffeeMachineStateStorage.find(coffeeMachineId);
-        CoffeeMachineConfiguration coffeeMachineConfiguration = coffeeMachineConfigurationStorage.find(coffeeMachineId);
+        CoffeeMachineConfigurationEntity coffeeMachineConfiguration = coffeeMachineConfigurationStorage.find(coffeeMachineId);
 
         return coffeeMachinesStatusCalculator.calculate(coffeeMachineState, coffeeMachineConfiguration);
     }

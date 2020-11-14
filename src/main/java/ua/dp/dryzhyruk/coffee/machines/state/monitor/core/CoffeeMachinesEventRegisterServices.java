@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Cup;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 import static ua.dp.dryzhyruk.coffee.machines.state.monitor.utils.Preconditions.requireNonNull;
@@ -32,7 +32,7 @@ public class CoffeeMachinesEventRegisterServices {
 
         CoffeeMachineStateEntity newCoffeeMachineState = calculateNewStateOnCupMade(cup, coffeeMachineState);
 
-        coffeeMachineStateStorage.update(coffeeMachineId, newCoffeeMachineState);
+        coffeeMachineStateStorage.update(newCoffeeMachineState);
     }
 
     public void registerLineService(
@@ -41,7 +41,7 @@ public class CoffeeMachinesEventRegisterServices {
 
         requireNonNull(coffeeMachineState);
 
-        CoffeeMachineConfiguration coffeeMachineConfiguration = coffeeMachineConfigurationStorage.find(coffeeMachineId);
+        CoffeeMachineConfigurationEntity coffeeMachineConfiguration = coffeeMachineConfigurationStorage.find(coffeeMachineId);
 
         requireNonNull(coffeeMachineConfiguration);
 
@@ -49,7 +49,7 @@ public class CoffeeMachinesEventRegisterServices {
                 coffeeBeansFilled, milkFilled, trashContainerCleaned,
                 coffeeMachineState, coffeeMachineConfiguration);
 
-        coffeeMachineStateStorage.update(coffeeMachineId, newCoffeeMachineState);
+        coffeeMachineStateStorage.update(newCoffeeMachineState);
     }
 
     private CoffeeMachineStateEntity calculateNewStateOnCupMade(Cup cup, CoffeeMachineStateEntity coffeeMachineState) {
@@ -75,7 +75,7 @@ public class CoffeeMachinesEventRegisterServices {
             boolean milkFilled,
             boolean trashContainerCleaned,
             CoffeeMachineStateEntity coffeeMachineState,
-            CoffeeMachineConfiguration coffeeMachineConfiguration) {
+            CoffeeMachineConfigurationEntity coffeeMachineConfiguration) {
 
         int coffeeBeansLeftForNPortions = coffeeBeansFilled
                 ? coffeeMachineConfiguration.getMaxNumberCoffeeBeansPortions()

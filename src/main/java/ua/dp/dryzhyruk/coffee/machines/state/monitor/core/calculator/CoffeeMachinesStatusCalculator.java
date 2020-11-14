@@ -3,7 +3,7 @@ package ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator;
 import org.springframework.stereotype.Service;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineState;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 @Service
@@ -11,7 +11,7 @@ public class CoffeeMachinesStatusCalculator {
 
     public CoffeeMachineState calculate(
             CoffeeMachineStateEntity coffeeMachineState,
-            CoffeeMachineConfiguration coffeeMachineConfiguration) {
+            CoffeeMachineConfigurationEntity coffeeMachineConfiguration) {
 
         Status coffeeBeansStatus = new StatusCalculator(
                 coffeeMachineConfiguration.getCoffeeBeansWarningNPortionLeft(),

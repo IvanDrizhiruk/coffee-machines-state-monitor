@@ -11,7 +11,7 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.CoffeeMachinesEventReg
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Cup;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 @ExtendWith(MockitoExtension.class)
@@ -57,7 +57,7 @@ class CoffeeMachinesEventRegisterServicesTest {
         coffeeMachinesEventRegisterServices.registerNewMadeCup(coffeeMachineId, cup);
 
         //then
-        Mockito.verify(coffeeMachineStateStorageMock).update(coffeeMachineId, expected);
+        Mockito.verify(coffeeMachineStateStorageMock).update(expected);
     }
 
     @Test
@@ -98,7 +98,7 @@ class CoffeeMachinesEventRegisterServicesTest {
         Mockito.when(coffeeMachineStateStorageMock.find(coffeeMachineId))
                 .thenReturn(coffeeMachineStateEntity);
 
-        CoffeeMachineConfiguration coffeeMachineConfiguration = CoffeeMachineConfiguration.builder()
+        CoffeeMachineConfigurationEntity coffeeMachineConfiguration = CoffeeMachineConfigurationEntity.builder()
                 .coffeeMachineId(coffeeMachineId)
                 .maxNumberCoffeeBeansPortions(100)
                 .coffeeBeansWarningNPortionLeft(30)
@@ -124,7 +124,7 @@ class CoffeeMachinesEventRegisterServicesTest {
                 coffeeMachineId, coffeeBeansFilled, milkFilled, trashContainerCleaned);
 
         //then
-        Mockito.verify(coffeeMachineStateStorageMock).update(coffeeMachineId, expected);
+        Mockito.verify(coffeeMachineStateStorageMock).update(expected);
     }
 
     @Test

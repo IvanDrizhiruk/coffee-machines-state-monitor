@@ -10,7 +10,7 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineSta
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 class CoffeeMachinesStatusServiceTest {
@@ -47,7 +47,7 @@ class CoffeeMachinesStatusServiceTest {
         Mockito.when(coffeeMachineStateStorageMock.find(coffeeMachineId))
                 .thenReturn(coffeeMachineStateEntity);
 
-        CoffeeMachineConfiguration coffeeMachineConfiguration = CoffeeMachineConfiguration.builder()
+        CoffeeMachineConfigurationEntity coffeeMachineConfiguration = CoffeeMachineConfigurationEntity.builder()
                 .coffeeMachineId(coffeeMachineId)
                 .maxNumberCoffeeBeansPortions(100)
                 .coffeeBeansWarningNPortionLeft(30)

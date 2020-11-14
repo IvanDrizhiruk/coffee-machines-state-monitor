@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Cup;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
 import java.util.List;
@@ -48,13 +48,21 @@ class N5_ErrorGuessing_CoffeeMachinesEventRegisterServicesTest {
     private static class CoffeeMachineConfigurationStorageMock implements CoffeeMachineConfigurationStorage {
 
         @Override
-        public CoffeeMachineConfiguration find(String coffeeMachineId) {
+        public CoffeeMachineConfigurationEntity find(String coffeeMachineId) {
             return null;
         }
 
         @Override
-        public List<CoffeeMachineConfiguration> findAll() {
+        public List<CoffeeMachineConfigurationEntity> findAll() {
             return null;
+        }
+
+        @Override
+        public void save(CoffeeMachineConfigurationEntity configuration) {
+        }
+
+        @Override
+        public void removeAll() {
         }
     }
 
@@ -81,9 +89,17 @@ class N5_ErrorGuessing_CoffeeMachinesEventRegisterServicesTest {
         }
 
         @Override
-        public void update(String coffeeMachineId, CoffeeMachineStateEntity newCoffeeMachineState) {
-            this.lastUpdatedCoffeeMachineId = coffeeMachineId;
+        public void update(CoffeeMachineStateEntity newCoffeeMachineState) {
+            this.lastUpdatedCoffeeMachineId = newCoffeeMachineState.getCoffeeMachineId();
             this.lastUpdatedCoffeeMachineState = newCoffeeMachineState;
+        }
+
+        @Override
+        public void save(CoffeeMachineStateEntity newCoffeeMachineState) {
+        }
+
+        @Override
+        public void removeAll() {
         }
     }
 }

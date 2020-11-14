@@ -1,12 +1,16 @@
 package ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api;
 
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 
 import java.util.List;
 
 public interface CoffeeMachineConfigurationStorage {
 
-    CoffeeMachineConfiguration find(String coffeeMachineId);
+    CoffeeMachineConfigurationEntity find(String coffeeMachineId);
 
-    List<CoffeeMachineConfiguration> findAll();
+    List<CoffeeMachineConfigurationEntity> findAll();
+
+    void save(CoffeeMachineConfigurationEntity configuration);
+
+    void removeAll();
 }
