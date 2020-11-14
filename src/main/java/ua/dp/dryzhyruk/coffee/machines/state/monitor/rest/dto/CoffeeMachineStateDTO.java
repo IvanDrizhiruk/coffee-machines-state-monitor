@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Value;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
 
+import java.time.LocalDateTime;
+
 @Value
 @Builder
 public class CoffeeMachineStateDTO {
@@ -18,4 +20,6 @@ public class CoffeeMachineStateDTO {
 
     private final int placeInTrashContainerLeftForNPortions;
     private final Status placesInTrashContainerStatus;
+
+    private final LocalDateTime timeOfCalculation;
 }

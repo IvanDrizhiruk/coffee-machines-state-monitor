@@ -7,6 +7,8 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineSta
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.rest.dto.CoffeeMachineStateDTO;
 
 import javax.ws.rs.*;
+import java.time.Clock;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,10 +18,12 @@ import java.util.stream.Collectors;
 @Consumes("application/json")
 public class CoffeeMachinesStatusesResource {
 
+    private final Clock clock;
     private final CoffeeMachinesStatusService coffeeMachinesStatusService;
 
     @Autowired
-    public CoffeeMachinesStatusesResource(CoffeeMachinesStatusService coffeeMachinesStatusService) {
+    public CoffeeMachinesStatusesResource(Clock clock, CoffeeMachinesStatusService coffeeMachinesStatusService) {
+        this.clock = clock;
         this.coffeeMachinesStatusService = coffeeMachinesStatusService;
     }
 
@@ -52,6 +56,8 @@ public class CoffeeMachinesStatusesResource {
 
                 .placeInTrashContainerLeftForNPortions(coffeeMachinesStatus.getPlaceInTrashContainerLeftForNPortions())
                 .placesInTrashContainerStatus(coffeeMachinesStatus.getPlacesInTrashContainerStatus())
+
+                .timeOfCalculation(LocalDateTime.now(clock))
 
                 .build();
     }

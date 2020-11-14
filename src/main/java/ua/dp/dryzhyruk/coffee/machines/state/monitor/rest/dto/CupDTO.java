@@ -8,5 +8,5 @@ import lombok.Value;
 public class CupDTO {
 
     private final int coffeePortions;
-    private final  boolean withMilk;
+    private final boolean withMilk;
 }

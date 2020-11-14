@@ -1,7 +1,6 @@
-package ua.dp.dryzhyruk.coffee.machines.state.monitor.core;
+package ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator;
 
 import org.springframework.stereotype.Service;
-import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator.StatusCalculator;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineState;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;

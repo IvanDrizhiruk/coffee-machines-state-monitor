@@ -2,6 +2,7 @@ package ua.dp.dryzhyruk.coffee.machines.state.monitor.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator.CoffeeMachinesStatusCalculator;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineState;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;

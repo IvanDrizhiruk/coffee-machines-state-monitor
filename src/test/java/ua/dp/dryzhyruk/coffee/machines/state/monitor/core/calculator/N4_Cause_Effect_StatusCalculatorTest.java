@@ -19,7 +19,7 @@ class N4_Cause_Effect_StatusCalculatorTest {
         //when
         Status actual = new StatusCalculator(warningLevel, criticalLevel)
                 .calculateState(nPortionsLeft);
-        
+
         //then
         Assertions.assertEquals(expected, actual);
     }

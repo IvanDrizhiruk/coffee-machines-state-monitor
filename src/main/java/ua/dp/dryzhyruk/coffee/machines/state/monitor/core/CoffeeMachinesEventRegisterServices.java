@@ -9,6 +9,8 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineSt
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfiguration;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
+import static ua.dp.dryzhyruk.coffee.machines.state.monitor.utils.Preconditions.requireNonNull;
+
 @Service
 public class CoffeeMachinesEventRegisterServices {
 
@@ -26,6 +28,8 @@ public class CoffeeMachinesEventRegisterServices {
     public void registerNewMadeCup(String coffeeMachineId, Cup cup) {
         CoffeeMachineStateEntity coffeeMachineState = coffeeMachineStateStorage.find(coffeeMachineId);
 
+        requireNonNull(coffeeMachineState);
+
         CoffeeMachineStateEntity newCoffeeMachineState = calculateNewStateOnCupMade(cup, coffeeMachineState);
 
         coffeeMachineStateStorage.update(coffeeMachineId, newCoffeeMachineState);
@@ -34,7 +38,12 @@ public class CoffeeMachinesEventRegisterServices {
     public void registerLineService(
             String coffeeMachineId, boolean coffeeBeansFilled, boolean milkFilled, boolean trashContainerCleaned) {
         CoffeeMachineStateEntity coffeeMachineState = coffeeMachineStateStorage.find(coffeeMachineId);
+
+        requireNonNull(coffeeMachineState);
+
         CoffeeMachineConfiguration coffeeMachineConfiguration = coffeeMachineConfigurationStorage.find(coffeeMachineId);
+
+        requireNonNull(coffeeMachineConfiguration);
 
         CoffeeMachineStateEntity newCoffeeMachineState = calculateNewStateOnLineService(
                 coffeeBeansFilled, milkFilled, trashContainerCleaned,

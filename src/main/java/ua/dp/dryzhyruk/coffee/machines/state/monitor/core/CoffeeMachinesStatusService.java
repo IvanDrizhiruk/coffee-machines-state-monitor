@@ -2,6 +2,7 @@ package ua.dp.dryzhyruk.coffee.machines.state.monitor.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.calculator.CoffeeMachinesStatusCalculator;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.CoffeeMachineState;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineConfigurationStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;

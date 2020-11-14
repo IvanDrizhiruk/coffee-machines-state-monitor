@@ -19,7 +19,7 @@ class N1_SuccessfulScenario_StatusCalculatorTest {
         //when
         Status actual = new StatusCalculator(warningLevel, criticalLevel)
                 .calculateState(nPortionsLeft);
-        
+
         //then
         Assertions.assertEquals(expected, actual);
     }
