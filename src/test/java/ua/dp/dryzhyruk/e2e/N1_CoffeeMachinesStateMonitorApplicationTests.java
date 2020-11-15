@@ -1,4 +1,4 @@
-package ua.dp.dryzhyruk.integration;
+package ua.dp.dryzhyruk.e2e;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +61,6 @@ class N1_CoffeeMachinesStateMonitorApplicationTests {
 
         coffeeMachineConfigurationStorage.save(coffeeMachineConfiguration);
     }
-
 
     @AfterEach
     void afterEach() {

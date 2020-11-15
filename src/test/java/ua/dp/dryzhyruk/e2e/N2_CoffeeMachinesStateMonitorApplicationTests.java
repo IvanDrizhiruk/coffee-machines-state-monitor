@@ -1,4 +1,4 @@
-package ua.dp.dryzhyruk.integration;
+package ua.dp.dryzhyruk.e2e;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +19,8 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineCo
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
-import ua.dp.dryzhyruk.integration.test.rest.clients.CoffeeMachineStatesClient;
-import ua.dp.dryzhyruk.integration.test.rest.clients.EventRegistrarClient;
+import ua.dp.dryzhyruk.e2e.test.rest.clients.CoffeeMachineStatesClient;
+import ua.dp.dryzhyruk.e2e.test.rest.clients.EventRegistrarClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +45,7 @@ class N2_CoffeeMachinesStateMonitorApplicationTests {
 
     @BeforeEach
     void beforeEach() {
+        //TODO move to the spring context
         eventRegistrarClient = new EventRegistrarClient(restTemplate);
         coffeeMachineStatesClient = new CoffeeMachineStatesClient(restTemplate);
 
