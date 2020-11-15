@@ -73,7 +73,7 @@ public class N3_CoffeeMachinesStateMonitorApplicationTests {
     }
 
     @Test
-    public void registerNewCapAndCheckStatus() {
+    public void registerNewCupAndCheckStatus() {
 
         String coffeeMachineId = "1";
 

@@ -81,7 +81,7 @@ class N2_CoffeeMachinesStateMonitorApplicationTests {
     }
 
     @Test
-    public void registerNewCapAndCheckStatus() {
+    public void registerNewCupAndCheckStatus() {
         //when
         String coffeeMachineId = "1";
 

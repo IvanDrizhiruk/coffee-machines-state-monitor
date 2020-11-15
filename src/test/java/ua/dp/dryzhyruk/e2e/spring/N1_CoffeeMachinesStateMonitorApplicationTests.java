@@ -69,7 +69,7 @@ class N1_CoffeeMachinesStateMonitorApplicationTests {
     }
 
     @Test
-    public void registerNewCapAndCheckStatus() {
+    public void registerNewCupAndCheckStatus() {
         String coffeeMachineId = "1";
         String cupProducedRequestUrl = "/event-registrar/coffee-machine/" + coffeeMachineId + "/cup-produced";
 
