@@ -1,4 +1,4 @@
-package ua.dp.dryzhyruk.e2e;
+package ua.dp.dryzhyruk.e2e.spring;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

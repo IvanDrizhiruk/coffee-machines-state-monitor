@@ -1,4 +1,4 @@
-package ua.dp.dryzhyruk.e2e.test.rest.clients;
+package ua.dp.dryzhyruk.e2e.spring.clients;
 
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;

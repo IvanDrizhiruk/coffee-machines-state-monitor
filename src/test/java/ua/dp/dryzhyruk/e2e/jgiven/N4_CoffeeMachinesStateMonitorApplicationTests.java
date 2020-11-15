@@ -1,15 +1,13 @@
-package ua.dp.dryzhyruk.e2e;
+package ua.dp.dryzhyruk.e2e.jgiven;
 
-
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.CoffeeMachinesStateMonitorApplication;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.core.model.Status;
@@ -20,24 +18,23 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineSt
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
 
-import static io.restassured.RestAssured.given;
-
 @ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {SpringConfig.class})
 @SpringBootTest(
         classes = CoffeeMachinesStateMonitorApplication.class,
-        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class N3_CoffeeMachinesStateMonitorApplicationTests {
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class N4_CoffeeMachinesStateMonitorApplicationTests {
 
     @Autowired
     private CoffeeMachineConfigurationStorage coffeeMachineConfigurationStorage;
     @Autowired
     private CoffeeMachineStateStorage coffeeMachineStateStorage;
 
-    @BeforeAll
-    public static void beforeAll() {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
-    }
+    @Autowired
+    private NewCupStage newCupStage;
+    @Autowired
+    private CoffeeMachineStateStage coffeeMachineStateStage;
+
 
     @BeforeEach
     void beforeEach() {
@@ -67,8 +64,14 @@ public class N3_CoffeeMachinesStateMonitorApplicationTests {
         coffeeMachineConfigurationStorage.save(coffeeMachineConfiguration);
     }
 
+    @AfterEach
+    void afterEach() {
+        coffeeMachineStateStorage.removeAll();
+        coffeeMachineConfigurationStorage.removeAll();
+    }
+
     @Test
-    public void shouldCorrectlyCountAddedCookies() {
+    void registerNewCapAndCheckStatus() {
 
         String coffeeMachineId = "1";
 
@@ -77,50 +80,28 @@ public class N3_CoffeeMachinesStateMonitorApplicationTests {
                 .withMilk(true)
                 .build();
 
-        given()
-                .accept(ContentType.JSON)
-                .contentType(ContentType.JSON)
-                .body(cup)
+        newCupStage
+                .given()
+                    .coffeeMachineId(coffeeMachineId)
+                    .cup(cup)
                 .when()
-                .post("/event-registrar/coffee-machine/" + coffeeMachineId + "/cup-produced")
+                    .registerNewCoffeeCup()
                 .then()
-                .assertThat()
-                .statusCode(204);
+                    .answerIs(HttpStatus.NO_CONTENT);
 
-        CoffeeMachineStateDTO state = RestAssured.get("/coffee-machine/" + coffeeMachineId + "/status")
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .as(CoffeeMachineStateDTO.class);
+        CoffeeMachineStateDTO expectedCoffeeMachineState = CoffeeMachineStateDTO.builder()
+                .coffeeMachineId(coffeeMachineId)
+                .coffeeBeansLeftForNPortions(99)
+                .coffeeBeansStatus(Status.OK)
+                .milkLeftForNPortions(29)
+                .milkStatus(Status.OK)
+                .placeInTrashContainerLeftForNPortions(99)
+                .placesInTrashContainerStatus(Status.OK)
+                .build();
 
-        RestAssured.get("/coffee-machine/" + coffeeMachineId + "/status")
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .body("", Matchers.aMapWithSize(8),
-                        "coffeeMachineId", Matchers.equalTo(coffeeMachineId),
-                        "coffeeBeansLeftForNPortions", Matchers.equalTo(99),
-                        "coffeeBeansStatus", Matchers.equalTo(Status.OK.toString()),
-                        "milkLeftForNPortions", Matchers.equalTo(29),
-                        "milkStatus", Matchers.equalTo(Status.OK.toString()),
-                        "placeInTrashContainerLeftForNPortions", Matchers.equalTo(99),
-                        "placesInTrashContainerStatus", Matchers.equalTo(Status.OK.toString()),
-                        "timeOfCalculation", Matchers.notNullValue());
-
-//        CoffeeMachineStateDTO expectedCoffeeMachineStateDTO = CoffeeMachineStateDTO.builder()
-//                .coffeeMachineId(coffeeMachineId)
-//                .coffeeBeansLeftForNPortions(99)
-//                .coffeeBeansStatus(Status.OK)
-//                .milkLeftForNPortions(29)
-//                .milkStatus(Status.OK)
-//                .placeInTrashContainerLeftForNPortions(99)
-//                .placesInTrashContainerStatus(Status.OK)
-//                .build();
-//
-//        assertThat(state)
-//                .usingRecursiveComparison()
-//                .ignoringFields("timeOfCalculation")
-//                .isEqualTo(expectedCoffeeMachineStateDTO);
+        coffeeMachineStateStage
+                .given().coffeeMachineId(coffeeMachineId)
+                .when().getCoffeeMachineState()
+                .then().answerIs(HttpStatus.OK, expectedCoffeeMachineState);
     }
 }

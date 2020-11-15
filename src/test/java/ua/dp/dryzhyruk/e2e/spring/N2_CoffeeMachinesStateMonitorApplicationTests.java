@@ -1,4 +1,4 @@
-package ua.dp.dryzhyruk.e2e;
+package ua.dp.dryzhyruk.e2e.spring;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +19,8 @@ import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineCo
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.CoffeeMachineStateStorage;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineConfigurationEntity;
 import ua.dp.dryzhyruk.coffee.machines.state.monitor.storage.api.entity.CoffeeMachineStateEntity;
-import ua.dp.dryzhyruk.e2e.test.rest.clients.CoffeeMachineStatesClient;
-import ua.dp.dryzhyruk.e2e.test.rest.clients.EventRegistrarClient;
+import ua.dp.dryzhyruk.e2e.spring.clients.CoffeeMachineStatesClient;
+import ua.dp.dryzhyruk.e2e.spring.clients.EventRegistrarClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
